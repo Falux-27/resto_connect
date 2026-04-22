@@ -1,0 +1,217 @@
+[
+  {
+    "id": "resto_001",
+    "name": "La Calebasse Dorée",
+    "zone": "Plateau",
+    "lat": 14.6937,
+    "lng": -17.4441,
+    "price_range": "low",
+    "avg_price": 3500,
+    "rating": 4.5,
+    "cuisine_type": ["senegalais", "local"],
+    "tags": ["terrasse", "familial", "wifi"],
+    "dietary": ["halal"],
+    "description": "Restaurant traditionnel sénégalais au cœur du Plateau. Thiéboudienne généreuse, cadre ombragé avec terrasse. L'adresse préférée des habitués pour un déjeuner rapide et savoureux.",
+    "opening_hours": "08:00-22:00",
+    "phone": "+221 77 222 3333",
+    "menu": [
+      {
+        "name": "Thiéboudienne Royale",
+        "price": 3500,
+        "tags": ["local", "halal", "poisson", "signature"],
+        "description": "Riz au poisson façon Saint-Louis, légumes frais du marché Kermel"
+      },
+      {
+        "name": "Yassa Poulet",
+        "price": 3000,
+        "tags": ["local", "halal", "poulet"],
+        "description": "Poulet mariné aux oignons caramélisés et citron vert"
+      },
+      {
+        "name": "Mafé Bœuf",
+        "price": 3200,
+        "tags": ["local", "halal", "viande"],
+        "description": "Ragoût de bœuf à la pâte d'arachide, riz blanc"
+      },
+      {
+        "name": "Jus de Bouye",
+        "price": 500,
+        "tags": ["boisson", "local", "sans_alcool"],
+        "description": "Jus de fruit de baobab frais, sucré légèrement"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800"
+  },
+  {
+    "id": "resto_002",
+    "name": "Le Lagon Bleu",
+    "zone": "Almadies",
+    "lat": 14.7435,
+    "lng": -17.5139,
+    "price_range": "high",
+    "avg_price": 15000,
+    "rating": 4.7,
+    "cuisine_type": ["seafood", "international", "français"],
+    "tags": ["vue_mer", "romantique", "climatisé", "parking"],
+    "dietary": ["halal", "vegetarien"],
+    "description": "Restaurant gastronomique en bord de mer aux Almadies. Fruits de mer frais, vue panoramique sur l'océan. Cadre élégant pour un dîner spécial.",
+    "opening_hours": "12:00-23:00",
+    "phone": "+221 33 860 1234",
+    "menu": [
+      {
+        "name": "Plateau Fruits de Mer",
+        "price": 18000,
+        "tags": ["seafood", "halal", "signature"],
+        "description": "Assortiment de crevettes, langoustines et poisson grillé pour 2 personnes"
+      },
+      {
+        "name": "Filet de Thiof Grillé",
+        "price": 12000,
+        "tags": ["seafood", "halal", "poisson", "grillé"],
+        "description": "Mérou blanc grillé, sauce citron-beurre, légumes de saison"
+      },
+      {
+        "name": "Salade Océane",
+        "price": 6500,
+        "tags": ["seafood", "vegetarien", "salade"],
+        "description": "Salade fraîche avec crevettes grillées et avocat"
+      },
+      {
+        "name": "Risotto aux Légumes",
+        "price": 8000,
+        "tags": ["vegetarien", "international"],
+        "description": "Risotto crémeux aux légumes grillés, parmesan"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800"
+  },
+  {
+    "id": "resto_003",
+    "name": "Dibiterie Serigne Fallou",
+    "zone": "Médina",
+    "lat": 14.6850,
+    "lng": -17.4530,
+    "price_range": "low",
+    "avg_price": 2500,
+    "rating": 4.3,
+    "cuisine_type": ["senegalais", "grillades", "street_food"],
+    "tags": ["populaire", "rapide", "authentique"],
+    "dietary": ["halal"],
+    "description": "Dibiterie populaire de la Médina. Viande grillée au charbon devant vous, sauce piquante maison. L'expérience street food authentique de Dakar.",
+    "opening_hours": "10:00-02:00",
+    "phone": "+221 77 555 6666",
+    "menu": [
+      {
+        "name": "Dibi Agneau",
+        "price": 3000,
+        "tags": ["halal", "grillé", "viande", "agneau", "signature"],
+        "description": "Agneau grillé au charbon, oignons et moutarde, pain tapalapa"
+      },
+      {
+        "name": "Dibi Bœuf",
+        "price": 2500,
+        "tags": ["halal", "grillé", "viande", "boeuf"],
+        "description": "Bœuf braisé épicé, frites et salade"
+      },
+      {
+        "name": "Fataya Viande",
+        "price": 500,
+        "tags": ["halal", "snack", "viande"],
+        "description": "Beignet farci à la viande hachée épicée"
+      },
+      {
+        "name": "Café Touba",
+        "price": 300,
+        "tags": ["boisson", "local", "sans_alcool"],
+        "description": "Café épicé au poivre de Selim, spécialité sénégalaise"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1529006557810-274b9b2fc783?w=800"
+  },
+  {
+    "id": "resto_004",
+    "name": "Chez Ami",
+    "zone": "Mermoz",
+    "lat": 14.7050,
+    "lng": -17.4750,
+    "price_range": "mid",
+    "avg_price": 5500,
+    "rating": 4.1,
+    "cuisine_type": ["libanais", "méditerranéen"],
+    "tags": ["familial", "terrasse", "livraison", "wifi"],
+    "dietary": ["halal", "vegetarien"],
+    "description": "Restaurant libanais réputé à Mermoz. Mezze généreux, shawarma juteux, ambiance familiale. Options végétariennes variées. Livraison disponible.",
+    "opening_hours": "11:00-23:00",
+    "phone": "+221 33 864 7890",
+    "menu": [
+      {
+        "name": "Assiette Mezze",
+        "price": 5000,
+        "tags": ["vegetarien", "halal", "méditerranéen", "signature"],
+        "description": "Houmous, taboulé, falafel, baba ghanoush, pain pita chaud"
+      },
+      {
+        "name": "Shawarma Poulet",
+        "price": 4500,
+        "tags": ["halal", "poulet", "grillé"],
+        "description": "Poulet mariné rôti à la broche, sauce ail, frites"
+      },
+      {
+        "name": "Falafel Wrap",
+        "price": 3500,
+        "tags": ["vegetarien", "vegan", "halal"],
+        "description": "Falafel croustillant, crudités, sauce tahini dans un pain libanais"
+      },
+      {
+        "name": "Limonade Menthe",
+        "price": 1500,
+        "tags": ["boisson", "sans_alcool"],
+        "description": "Citron pressé frais à la menthe et glace pilée"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800"
+  },
+  {
+    "id": "resto_005",
+    "name": "Bazoff",
+    "zone": "Point E",
+    "lat": 14.6902,
+    "lng": -17.4608,
+    "price_range": "mid",
+    "avg_price": 7500,
+    "rating": 4.4,
+    "cuisine_type": ["grillades", "local", "international"],
+    "tags": ["festif", "groupe", "musique", "terrasse"],
+    "dietary": ["halal"],
+    "description": "Institution des grillades à Dakar. Poulet braisé aux épices locales, ambiance festive et chaleureuse. Idéal pour les groupes. Bonne sélection de cocktails exotiques.",
+    "opening_hours": "12:00-00:00",
+    "phone": "+221 77 111 0000",
+    "menu": [
+      {
+        "name": "Poulet Braisé Bazoff",
+        "price": 6500,
+        "tags": ["halal", "grillé", "poulet", "signature"],
+        "description": "Poulet entier mariné aux épices Bazoff, braisé au charbon de bois"
+      },
+      {
+        "name": "Brochettes Mixtes",
+        "price": 7000,
+        "tags": ["halal", "grillé", "viande"],
+        "description": "Brochettes de boeuf et agneau, sauce oignon et frites maison"
+      },
+      {
+        "name": "Thiéboudienne du Chef",
+        "price": 5500,
+        "tags": ["local", "halal", "poisson"],
+        "description": "Riz au poisson traditionnel, recette du chef Bazoff"
+      },
+      {
+        "name": "Cocktail Bissap-Gingembre",
+        "price": 2000,
+        "tags": ["boisson", "local", "sans_alcool"],
+        "description": "Jus d'hibiscus frais au gingembre, spécialité maison"
+      }
+    ],
+    "image": "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800"
+  }
+]
