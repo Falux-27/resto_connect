@@ -110,8 +110,9 @@ class HomeController extends GetxController {
     });
   }
 
+  final scaffoldKey = GlobalKey<ScaffoldState>();
+
   void navigateToFavorites() => Get.toNamed(AppRoutes.favorites);
 
-  // TODO: ouvrir le drawer / menu latéral
-  void openMenu() {}
+  void openMenu() => scaffoldKey.currentState?.openDrawer();
 }

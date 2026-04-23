@@ -10,6 +10,7 @@ import 'widgets/quick_filter_grid.dart';
 import 'widgets/ai_hint_banner.dart';
 import 'widgets/location_chip_widget.dart';
 import 'widgets/animated_mascot.dart';
+import 'widgets/app_drawer.dart';
 
 class HomeScreen extends GetView<HomeController> {
   const HomeScreen({super.key});
@@ -22,7 +23,9 @@ class HomeScreen extends GetView<HomeController> {
         statusBarIconBrightness: Brightness.dark,
       ),
       child: Scaffold(
+        key: controller.scaffoldKey,
         backgroundColor: AppColors.sand,
+        drawer: const AppDrawer(),
         body: SafeArea(
           child: GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
@@ -67,7 +70,7 @@ class HomeScreen extends GetView<HomeController> {
                 ),
                 SliverToBoxAdapter(
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(20, 20, 20, 56),
+                    padding: const EdgeInsets.fromLTRB(0, 24, 0, 48),
                     child: AiHintBanner(
                       onTap: () => _showSearchModal(context),
                     ),
@@ -139,36 +142,43 @@ class HomeScreen extends GetView<HomeController> {
   }
 }
 
-// Widget stateful séparé pour le modal — gère le clavier sans conflit de contexte.
 class _SearchModal extends StatefulWidget {
-  final TextEditingController textCtrl;
-  const _SearchModal({required this.textCtrl});
+  const _SearchModal();
 
   @override
   State<_SearchModal> createState() => _SearchModalState();
 }
 
 class _SearchModalState extends State<_SearchModal> {
+  late final TextEditingController _textCtrl = TextEditingController();
+
+  @override
+  void dispose() {
+    _textCtrl.dispose();
+    super.dispose();
+  }
+
   void _submit() {
-    final q = widget.textCtrl.text.trim();
+    final q = _textCtrl.text.trim();
     if (q.isEmpty) return;
     Navigator.of(context).pop(q);
   }
 
   @override
   Widget build(BuildContext context) {
+    final bottomInset = MediaQuery.of(context).viewInsets.bottom;
     return Padding(
-      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+      padding: EdgeInsets.only(bottom: bottomInset),
       child: Container(
-        padding: const EdgeInsets.fromLTRB(20, 16, 20, 28),
         decoration: const BoxDecoration(
           color: AppColors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(24)),
         ),
         child: Column(
           mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            // Handle
+            const SizedBox(height: 12),
             Center(
               child: Container(
                 width: 36,
@@ -180,85 +190,164 @@ class _SearchModalState extends State<_SearchModal> {
               ),
             ),
             const SizedBox(height: 20),
-            Row(
-              children: [
-                Container(
-                  width: 32,
-                  height: 32,
-                  decoration: BoxDecoration(
-                    color: AppColors.teal,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: const Icon(
-                    Icons.auto_awesome_rounded,
-                    color: AppColors.white,
-                    size: 16,
-                  ),
-                ),
-                const SizedBox(width: 10),
-                Text('Que cherchez-vous ?', style: AppTextStyles.h2),
-              ],
-            ),
-            const SizedBox(height: 4),
+            // Header row
             Padding(
-              padding: const EdgeInsets.only(left: 42),
-              child: Text(
-                'Posez votre question normalement',
-                style: AppTextStyles.bodySmall,
-              ),
-            ),
-            const SizedBox(height: 18),
-            TextField(
-              controller: widget.textCtrl,
-              autofocus: true,
-              textInputAction: TextInputAction.search,
-              style: AppTextStyles.inputText,
-              decoration: InputDecoration(
-                hintText: 'Ex: halal près du stade, vue mer…',
-                hintStyle: AppTextStyles.inputHint,
-                filled: true,
-                fillColor: AppColors.inputBg,
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: BorderSide.none,
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(14),
-                  borderSide: const BorderSide(color: AppColors.teal, width: 1.5),
-                ),
-                prefixIcon: const Icon(
-                  Icons.search_rounded,
-                  color: AppColors.muted,
-                  size: 20,
-                ),
-                contentPadding: const EdgeInsets.symmetric(
-                  horizontal: 16,
-                  vertical: 16,
-                ),
-              ),
-              onSubmitted: (_) => _submit(),
-            ),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: AppColors.teal,
-                  foregroundColor: AppColors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(14),
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Container(
+                    width: 44,
+                    height: 44,
+                    decoration: BoxDecoration(
+                      color: AppColors.orange,
+                      borderRadius: BorderRadius.circular(14),
+                    ),
+                    child: const Icon(
+                      Icons.auto_awesome_rounded,
+                      color: AppColors.white,
+                      size: 20,
+                    ),
                   ),
-                  elevation: 0,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text('Demandez à Resto', style: AppTextStyles.h2),
+                        const SizedBox(height: 2),
+                        Text(
+                          'FR · EN · ES · AR · parlez naturellement',
+                          style: AppTextStyles.bodySmall.copyWith(
+                            color: AppColors.muted,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Container(
+                      width: 32,
+                      height: 32,
+                      decoration: BoxDecoration(
+                        color: AppColors.inputBg,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(Icons.close_rounded, size: 18, color: AppColors.ink),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 20),
+            // Text field
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Container(
+                decoration: BoxDecoration(
+                  color: AppColors.inputBg,
+                  borderRadius: BorderRadius.circular(16),
                 ),
-                icon: const Icon(Icons.search_rounded, size: 18),
-                label: Text('Rechercher', style: AppTextStyles.button),
-                onPressed: _submit,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: TextField(
+                        controller: _textCtrl,
+                        autofocus: true,
+                        textInputAction: TextInputAction.search,
+                        style: AppTextStyles.inputText,
+                        decoration: InputDecoration(
+                          hintText: 'Un thiof grillé près du Plateau…',
+                          hintStyle: AppTextStyles.inputHint,
+                          border: InputBorder.none,
+                          contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 16,
+                            vertical: 16,
+                          ),
+                        ),
+                        onSubmitted: (_) => _submit(),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: GestureDetector(
+                        onTap: _submit,
+                        child: Container(
+                          width: 36,
+                          height: 36,
+                          decoration: BoxDecoration(
+                            color: AppColors.divider,
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                          child: const Icon(
+                            Icons.arrow_forward_rounded,
+                            size: 18,
+                            color: AppColors.ink,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            // Voice hint bar
+            Container(
+              width: double.infinity,
+              padding: const EdgeInsets.symmetric(vertical: 16),
+              decoration: BoxDecoration(
+                color: AppColors.orange.withValues(alpha: 0.07),
+                border: Border(
+                  top: BorderSide(color: AppColors.orange.withValues(alpha: 0.12), width: 1),
+                ),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  _WaveformIcon(),
+                  const SizedBox(width: 10),
+                  Text(
+                    'Dictez ou tapez votre demande',
+                    style: AppTextStyles.bodySmall.copyWith(
+                      color: AppColors.orange,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
         ),
       ),
+    );
+  }
+}
+
+class _WaveformIcon extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    const color = AppColors.orange;
+    const heights = [8.0, 14.0, 10.0, 18.0, 10.0, 14.0, 8.0];
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: heights
+          .map(
+            (h) => Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 1.5),
+              child: Container(
+                width: 3,
+                height: h,
+                decoration: BoxDecoration(
+                  color: color,
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+            ),
+          )
+          .toList(),
     );
   }
 }
