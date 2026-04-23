@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import '../models/chat_message_model.dart';
 import '../models/restaurant_model.dart';
 import '../models/menu_item_model.dart';
@@ -12,7 +13,8 @@ class ChatResult {
   final List<RestaurantModel> restaurants;
   final String detectedLanguage;
   final bool fromCache;
-  final double? totalTimeS;  // temps de réponse backend
+  final double? totalTimeS;
+  final bool isOffline;
 
   const ChatResult({
     required this.reply,
@@ -20,6 +22,7 @@ class ChatResult {
     required this.detectedLanguage,
     this.fromCache = false,
     this.totalTimeS,
+    this.isOffline = false,
   });
 }
 
@@ -84,8 +87,7 @@ class ChatRepository {
       );
 
     } on DioException catch (e) {
-      // ─── Fallback offline ────────────────────────────────
-      print('⚠️ [ChatRepo] API error: ${e.message}');
+      debugPrint('⚠️ [ChatRepo] API error: ${e.message}');
       final fallbackReply = _offlineFallback(message);
       _history.add(ChatMessageModel(role: 'assistant', content: fallbackReply));
 
@@ -93,6 +95,7 @@ class ChatRepository {
         reply:            fallbackReply,
         restaurants:      _localFallbackSearch(message),
         detectedLanguage: 'fr',
+        isOffline:        true,
       );
     }
   }

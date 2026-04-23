@@ -25,10 +25,10 @@ class HomeController extends GetxController {
   ];
 
   final quickFilters = [
-    {'icon': '🕌', 'label': 'Halal',        'sub': 'Certifié',     'tag': 'halal'},
-    {'icon': '🌿', 'label': 'Végétarien',   'sub': '& vegan',      'tag': 'vegetarien'},
-    {'icon': '💸', 'label': 'Petit budget', 'sub': '< 3 500 FCFA', 'tag': 'cheap'},
-    {'icon': '🌊', 'label': 'Vue mer',      'sub': 'Almadies',     'tag': 'vue mer'},
+    {'label': 'Halal',        'sub': 'Certifié',     'tag': 'halal'},
+    {'label': 'Végétarien',   'sub': '& vegan',      'tag': 'vegetarien'},
+    {'label': 'Petit budget', 'sub': '< 3 500 FCFA', 'tag': 'cheap'},
+    {'label': 'Vue mer',      'sub': 'Almadies',     'tag': 'vue mer'},
   ];
 
   @override
@@ -111,4 +111,7 @@ class HomeController extends GetxController {
   }
 
   void navigateToFavorites() => Get.toNamed(AppRoutes.favorites);
+
+  // TODO: ouvrir le drawer / menu latéral
+  void openMenu() {}
 }

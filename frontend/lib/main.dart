@@ -4,7 +4,6 @@ import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:get/get.dart';
 import 'core/network/api_client.dart';
 import 'core/theme/app_theme.dart';
-import 'features/home/home_controller.dart';
 import 'routes/app_routes.dart';
 
 void main() async {
@@ -14,7 +13,7 @@ void main() async {
   try {
     await dotenv.load(fileName: '.env');
   } catch (_) {
-    print('⚠️ .env non trouvé, utilisation des valeurs par défaut');
+    print('.env non trouvé, utilisation des valeurs par défaut');
   }
 
   // Orientation portrait uniquement
@@ -26,12 +25,7 @@ void main() async {
   // Initialiser le client HTTP
   ApiClient().init();
 
-  // ╔════════════════════════════════════════════════════════════╗
-  // ║  IMPORTANT: Enregistrer HomeController AVANT runApp        ║
-  // ║  Garantit que le controller existe peu importe le timing   ║
-  // ║  des bindings GetX. Évite "HomeController not found".      ║
-  // ╚════════════════════════════════════════════════════════════╝
-  // Get.put<HomeController>(HomeController(), permanent: true);
+  
 
   runApp(const RestoConnectApp());
 }

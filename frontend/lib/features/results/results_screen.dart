@@ -19,7 +19,12 @@ class ResultsScreen extends GetView<ResultsController> {
             _buildHeader(),
             Obx(() => controller.isLoading.value
                 ? const SizedBox.shrink()
-                : _buildAiBanner()),
+                : Column(
+                    children: [
+                      if (controller.isOfflineFallback.value) _buildOfflineBanner(),
+                      _buildAiBanner(),
+                    ],
+                  )),
             Expanded(
               child: Obx(() {
                 if (controller.isLoading.value) return _buildSkeleton();
@@ -59,6 +64,32 @@ class ResultsScreen extends GetView<ResultsController> {
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildOfflineBanner() {
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(16, 0, 16, 8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+        decoration: BoxDecoration(
+          color: AppColors.orangeLight,
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: AppColors.orange.withValues(alpha: 0.3)),
+        ),
+        child: Row(
+          children: [
+            const Icon(Icons.wifi_off_rounded, size: 16, color: AppColors.orange),
+            const SizedBox(width: 8),
+            Expanded(
+              child: Text(
+                'Backend non joignable — résultats locaux uniquement.',
+                style: AppTextStyles.bodySmall.copyWith(color: AppColors.orange),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -111,7 +142,7 @@ class ResultsScreen extends GetView<ResultsController> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Text('🍽️', style: TextStyle(fontSize: 52)),
+            const Icon(Icons.restaurant_rounded, size: 52, color: AppColors.muted),
             const SizedBox(height: 16),
             Text('Aucun restaurant trouvé', style: AppTextStyles.h2, textAlign: TextAlign.center),
             const SizedBox(height: 8),

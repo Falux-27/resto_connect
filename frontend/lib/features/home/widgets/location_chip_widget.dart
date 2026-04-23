@@ -13,11 +13,15 @@ class LocationChipWidget extends GetView<HomeController> {
       children: [
         const Icon(Icons.location_on_outlined, size: 14, color: AppColors.muted),
         const SizedBox(width: 4),
-        Text(
-          '${controller.zone.value} · '
-          '${controller.locationReady.value ? 'à moins de 3 km' : 'Localisation...'}'
-          ' · basé sur votre position',
-          style: AppTextStyles.bodySmall,
+        Flexible(
+          child: Text(
+            '${controller.zone.value} · '
+            '${controller.locationReady.value ? 'à moins de 3 km' : 'Localisation...'}'
+            ' · basé sur votre position',
+            style: AppTextStyles.bodySmall,
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
+          ),
         ),
       ],
     ));

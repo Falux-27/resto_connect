@@ -53,7 +53,7 @@
  
 <!-- Permission localisation (déjà normalement présent pour geolocator) -->
 <key>NSLocationWhenInUseUsageDescription</key>
-<string>Resto Connect Dakar utilise votre position pour trouver les restaurants proches de vous.</string>
+<string>JOJ'Eat Connect Dakar utilise votre position pour trouver les restaurants proches de vous.</string>
 				</dict>
 			</array>
 		</dict>

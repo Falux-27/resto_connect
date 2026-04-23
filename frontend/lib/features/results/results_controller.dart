@@ -8,14 +8,15 @@ class ResultsController extends GetxController {
   final ChatRepository       _chatRepo   = ChatRepository();
   final RestaurantRepository _localRepo  = RestaurantRepository();
 
-  final RxList<RestaurantModel> results      = <RestaurantModel>[].obs;
-  final RxBool                  isLoading    = true.obs;
-  final RxBool                  hasError     = false.obs;
-  final RxString                query        = ''.obs;
-  final RxString                aiReply      = ''.obs;
-  final RxList<String>          activeFilters = <String>[].obs;
-  final RxDouble                responseTime = 0.0.obs;  // temps en secondes
-  final RxBool                  fromCache    = false.obs;
+  final RxList<RestaurantModel> results           = <RestaurantModel>[].obs;
+  final RxBool                  isLoading          = true.obs;
+  final RxBool                  hasError           = false.obs;
+  final RxString                query              = ''.obs;
+  final RxString                aiReply            = ''.obs;
+  final RxList<String>          activeFilters      = <String>[].obs;
+  final RxDouble                responseTime       = 0.0.obs;
+  final RxBool                  fromCache          = false.obs;
+  final RxBool                  isOfflineFallback  = false.obs;
 
   double? _userLat;
   double? _userLng;
@@ -49,6 +50,7 @@ class ResultsController extends GetxController {
         aiReply.value = chatResult.reply;
         fromCache.value = chatResult.fromCache;
         responseTime.value = chatResult.totalTimeS ?? 0.0;
+        isOfflineFallback.value = chatResult.isOffline;
 
         // Si le chatbot ne retourne rien → fallback local
         if (results.isEmpty) _localSearch();

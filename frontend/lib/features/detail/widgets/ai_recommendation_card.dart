@@ -40,7 +40,7 @@ class AiRecommendationCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Pourquoi Resto recommande',
+                    Text("Pourquoi JOJ'Eat recommande",
                         style: AppTextStyles.bodyMedium.copyWith(fontWeight: FontWeight.w700)),
                     if (restaurant.matchScore != null)
                       Text('SCORE ${restaurant.matchScore} / 100',
