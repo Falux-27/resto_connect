@@ -81,20 +81,13 @@ class HomeScreen extends GetView<HomeController> {
     );
   }
 
-  // Ouvre un bottom sheet de recherche et navigue vers /results
-  // seulement APRÈS que la modal soit entièrement fermée (évite le red screen).
   Future<void> _showSearchModal(BuildContext context) async {
-    final textCtrl = TextEditingController();
-
     final query = await showModalBottomSheet<String>(
       context: context,
       isScrollControlled: true,
       backgroundColor: Colors.transparent,
-      builder: (ctx) => _SearchModal(textCtrl: textCtrl),
+      builder: (_) => const _SearchModal(),
     );
-
-    textCtrl.dispose();
-
     if (query != null && query.isNotEmpty) {
       controller.onSearch(query);
     }

@@ -142,7 +142,7 @@ class ResultsScreen extends GetView<ResultsController> {
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.restaurant_rounded, size: 52, color: AppColors.muted),
+            const Text('🍽️', style: TextStyle(fontSize: 52)),
             const SizedBox(height: 16),
             Text('Aucun restaurant trouvé', style: AppTextStyles.h2, textAlign: TextAlign.center),
             const SizedBox(height: 8),
