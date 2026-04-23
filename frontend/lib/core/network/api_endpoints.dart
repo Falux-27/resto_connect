@@ -1,14 +1,29 @@
-abstract class ApiEndpoints {
-  // ─── Base URL ──────────────────────────────────────────────
-  // Android émulateur → 10.0.2.2 pointe vers localhost de la machine hôte
-  // iOS simulateur   → localhost directement
-  // Device physique  → IP locale de ta machine (ex: 192.168.1.X)
-  static const String _devAndroid = 'http://10.0.2.2:8000';
-  static const String _devIos     = 'http://localhost:8000';
-  static const String _prod       = 'https://api.restoconnectdakar.com';
+import 'dart:io' show Platform;
+import 'package:flutter/foundation.dart' show kIsWeb, kDebugMode;
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-  // Changer ici pour cibler la bonne plateforme
-  static const String baseUrl = _devAndroid;
+abstract class ApiEndpoints {
+  // ─── Base URL (auto-détection) ─────────────────────────────
+  // En debug: détecte Android émulateur vs iOS vs device physique
+  // En release: utilise la variable d'env BASE_URL ou le fallback prod
+
+  static String get baseUrl {
+    // 1. Si défini dans .env → priorité absolue
+    final envUrl = dotenv.env['BASE_URL'];
+    if (envUrl != null && envUrl.isNotEmpty) return envUrl;
+
+    // 2. En mode debug → localhost selon la plateforme
+    if (kDebugMode) {
+      if (kIsWeb) return 'http://localhost:8000';
+      if (Platform.isAndroid) return 'http://10.0.2.2:8000';
+      if (Platform.isIOS) return 'http://localhost:8000';
+      // Windows/Linux/macOS desktop
+      return 'http://localhost:8000';
+    }
+
+    // 3. Production
+    return 'https://api.restoconnectdakar.com';
+  }
 
   // ─── Endpoints ─────────────────────────────────────────────
   static const String chat        = '/chat';

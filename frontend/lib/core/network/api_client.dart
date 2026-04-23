@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import '../constants/app_colors.dart';
 import 'api_endpoints.dart';
 
 class ApiClient {
@@ -10,11 +9,14 @@ class ApiClient {
   late final Dio _dio;
 
   void init() {
+    final url = ApiEndpoints.baseUrl;
+    print('🌐 [API] Base URL: $url');
+
     _dio = Dio(
       BaseOptions(
-        baseUrl: ApiEndpoints.baseUrl,
-        connectTimeout: const Duration(seconds: 8),
-        receiveTimeout: const Duration(seconds: 15),
+        baseUrl: url,
+        connectTimeout: const Duration(seconds: 5),
+        receiveTimeout: const Duration(seconds: 10),
         headers: {
           'Content-Type': 'application/json',
           'Accept': 'application/json',
@@ -34,7 +36,6 @@ class ApiClient {
     _dio.interceptors.add(
       InterceptorsWrapper(
         onError: (DioException e, handler) async {
-          // Retry une seule fois sur timeout
           if (e.type == DioExceptionType.connectionTimeout ||
               e.type == DioExceptionType.receiveTimeout) {
             try {

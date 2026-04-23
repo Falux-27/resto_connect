@@ -43,6 +43,17 @@
 					<string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
 					<key>UISceneStoryboardFile</key>
 					<string>Main</string>
+					<key>LSApplicationQueriesSchemes</key>
+<array>
+    <string>tel</string>
+    <string>geo</string>
+    <string>comgooglemaps</string>
+    <string>https</string>
+</array>
+ 
+<!-- Permission localisation (déjà normalement présent pour geolocator) -->
+<key>NSLocationWhenInUseUsageDescription</key>
+<string>Resto Connect Dakar utilise votre position pour trouver les restaurants proches de vous.</string>
 				</dict>
 			</array>
 		</dict>

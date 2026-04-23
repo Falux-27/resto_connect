@@ -30,7 +30,7 @@ abstract class AppTextStyles {
   static TextStyle get h3 => GoogleFonts.plusJakartaSans(
         fontSize: 16,
         fontWeight: FontWeight.w600,
-        color: AppColors.ink,
+        color: const Color.fromARGB(255, 21, 21, 22),
       );
 
   // ─── Body ──────────────────────────────────────────────────
@@ -55,7 +55,7 @@ abstract class AppTextStyles {
       );
 
   // ─── Labels ────────────────────────────────────────────────
-  /// "BONJOUR 👋" — label caps en haut
+  /// "BONJOUR " — label caps en haut
   static TextStyle get label => GoogleFonts.plusJakartaSans(
         fontSize: 11,
         fontWeight: FontWeight.w600,

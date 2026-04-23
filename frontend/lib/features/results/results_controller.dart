@@ -14,6 +14,8 @@ class ResultsController extends GetxController {
   final RxString                query        = ''.obs;
   final RxString                aiReply      = ''.obs;
   final RxList<String>          activeFilters = <String>[].obs;
+  final RxDouble                responseTime = 0.0.obs;  // temps en secondes
+  final RxBool                  fromCache    = false.obs;
 
   double? _userLat;
   double? _userLng;
@@ -36,7 +38,7 @@ class ResultsController extends GetxController {
 
     try {
       if (query.value.isNotEmpty) {
-        // ── Appel chatbot IA (backend) ──────────────────────
+        // ── Appel chatbot IA (backend FAST PATH) ────────────
         final chatResult = await _chatRepo.sendMessage(
           message:  query.value,
           userLat:  _userLat,
@@ -45,6 +47,8 @@ class ResultsController extends GetxController {
         );
         results.value = chatResult.restaurants;
         aiReply.value = chatResult.reply;
+        fromCache.value = chatResult.fromCache;
+        responseTime.value = chatResult.totalTimeS ?? 0.0;
 
         // Si le chatbot ne retourne rien → fallback local
         if (results.isEmpty) _localSearch();
@@ -53,7 +57,7 @@ class ResultsController extends GetxController {
         _localSearch();
       }
     } catch (e) {
-      // ── Fallback complet local si backend KO ────────────
+      print('⚠️ [ResultsController] Error: $e');
       _localSearch();
     }
 
@@ -91,11 +95,17 @@ class ResultsController extends GetxController {
   String get resultsSummary {
     final n = results.length;
     if (n == 0) return 'Aucun restaurant trouvé.';
-    // Utilise la réponse de l'IA si disponible
+
+    // Utilise la première ligne de la réponse IA
     if (aiReply.value.isNotEmpty) {
-      // Première ligne de la réponse IA
-      return aiReply.value.split('\n').first;
+      final firstLine = aiReply.value.split('\n').first;
+      // Ajouter le temps si disponible
+      if (responseTime.value > 0 && responseTime.value < 0.1) {
+        return '$firstLine ⚡';  // éclair pour les réponses instantanées
+      }
+      return firstLine;
     }
+
     return '$n resto${n > 1 ? 's' : ''} trié${n > 1 ? 's' : ''} par '
         'proximité, budget et match.';
   }

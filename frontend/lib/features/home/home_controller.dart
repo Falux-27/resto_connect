@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
-import '../../data/repositories/restaurant_repository.dart';
 import '../../routes/app_routes.dart';
 
 class HomeController extends GetxController {
-  final RestaurantRepository _repo = RestaurantRepository();
+  // Note: Pas de repo ici — la recherche se fait dans ResultsController.
+  // Le HomeController ne sert qu'à gérer la UI de la home.
 
   final TextEditingController searchController = TextEditingController();
   final FocusNode searchFocus = FocusNode();
@@ -44,8 +44,7 @@ class HomeController extends GetxController {
     super.onClose();
   }
 
-  // FIX: utilise desiredAccuracy au lieu de locationSettings
-  // compatible geolocator ^9.x, ^10.x, ^11.x
+  /// Compatible geolocator ^9.x, ^10.x, ^11.x
   Future<void> _requestLocation() async {
     try {
       bool serviceEnabled = await Geolocator.isLocationServiceEnabled();

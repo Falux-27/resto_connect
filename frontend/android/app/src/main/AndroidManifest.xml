@@ -42,4 +42,24 @@
             <data android:mimeType="text/plain"/>
         </intent>
     </queries>
+    <!-- À ajouter dans android/app/src/main/AndroidManifest.xml -->
+<!-- JUSTE AVANT la balise fermante </manifest> -->
+
+<queries>
+    <!-- Téléphone -->
+    <intent>
+        <action android:name="android.intent.action.DIAL" />
+        <data android:scheme="tel" />
+    </intent>
+    <!-- Google Maps -->
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="geo" />
+    </intent>
+    <intent>
+        <action android:name="android.intent.action.VIEW" />
+        <data android:scheme="https"
+              android:host="www.google.com" />
+    </intent>
+</queries>
 </manifest>

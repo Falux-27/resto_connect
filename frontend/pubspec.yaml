@@ -1,4 +1,4 @@
-name: frontend
+name: resto_connect_dakar
 description: Application IA de recommandation de restaurants — JOJ Dakar 2026
 publish_to: 'none'
 version: 1.0.0+1
@@ -37,6 +37,7 @@ dependencies:
 
   # Utils
   intl: ^0.19.0
+  url_launcher: ^6.3.0
 
 dev_dependencies:
   flutter_test:
